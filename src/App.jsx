@@ -26,7 +26,9 @@ export default function App() {
     fetch("https://assessment-recommendation-engine-0mg0.onrender.com/health")
       .then((response) => response.json())
       .then((data) => {
-        setTimeout(() => setMessage("Ready to analyze"), 2000);
+        if (data) {
+          setTimeout(() => setMessage("Ready to analyze"), 2000);
+        }
       })
       .catch((error) => console.log(error));
   }, []);
@@ -41,7 +43,7 @@ export default function App() {
       "https://assessment-recommendation-engine-0mg0.onrender.com/recommend";
 
     try {
-      const response = await fetch(YOUR_API_ENDPOINT, {
+      const response = await fetch(API_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
