@@ -19,11 +19,15 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [message, setMessage] = useState(
+    "Connecting the server...(please wait)",
+  );
   useEffect(() => {
     fetch("https://assessment-recommendation-engine-0mg0.onrender.com/health")
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        setTimeout(() => setMessage("Ready to analyze"), 2000);
+      })
       .catch((error) => console.log(error));
   }, []);
 
@@ -170,7 +174,7 @@ export default function App() {
                       <td className="px-6 py-5 text-center font-bold text-[10px] uppercase">
                         {item.remote_support === "Yes" ? (
                           <span className="text-emerald-600 flex items-center justify-center gap-1">
-                            <CheckCircle2 className="h-4 w-4" /> Supported
+                            <CheckCircle2 className="h-4 w-4" /> Yes
                           </span>
                         ) : (
                           <span className="text-slate-300 flex items-center justify-center gap-1">
@@ -210,9 +214,7 @@ export default function App() {
             <div className="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
               <Monitor className="h-10 w-10 text-slate-300" />
             </div>
-            <h3 className="text-slate-800 font-bold text-xl">
-              Ready to analyze
-            </h3>
+            <h3 className="text-slate-800 font-bold text-xl">{message}</h3>
             <p className="text-slate-400 max-w-sm mx-auto mt-2 text-sm">
               Type in your hiring context to find the best match.
             </p>
