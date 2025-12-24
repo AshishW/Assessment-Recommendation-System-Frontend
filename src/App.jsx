@@ -37,7 +37,7 @@ export default function App() {
     setIsLoading(true);
     setErrorMessage("");
 
-    const YOUR_API_ENDPOINT =
+    const API_ENDPOINT =
       "https://assessment-recommendation-engine-0mg0.onrender.com/recommend";
 
     try {
